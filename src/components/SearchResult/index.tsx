@@ -3,13 +3,13 @@ import { SickResponse } from '../../types/SickType';
 import * as S from './SearchResult.style';
 
 interface IProps {
+  isFocused: boolean;
   searchedArr: SickResponse[];
   isLoading: boolean;
 }
-export const SearchResult = ({ searchedArr, isLoading }: IProps) => {
-  if (isLoading) {
-    return <>Loading...</>;
-  }
+export const SearchResult = ({ isFocused, searchedArr, isLoading }: IProps) => {
+  if (!isFocused) return <></>;
+  if (isLoading) return <>Loading...</>;
   return (
     <S.Ul>
       {searchedArr.length < 1 && <>최근 검색어가 없습니다.</>}

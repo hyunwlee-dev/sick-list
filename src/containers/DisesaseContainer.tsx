@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useId, useState } from 'react';
+import React, { ChangeEvent, useEffect, useId, useRef, useState } from 'react';
 import { styled, css } from 'styled-components';
 import { SearchInput } from '../components/SearchInput';
 import { SearchResult } from '../components/SearchResult';
@@ -11,17 +11,35 @@ const DisesaseContainer = () => {
     setSearchValue(e.target.value);
     fetchSick(e.target.value);
   };
+  const [isFocused, setIsFocused] = useState(false);
+  const focus = () => {
+    setIsFocused(true);
+  };
+  const blur = () => {
+    setIsFocused(false);
+  };
+  //FIX: no necessarily ref
+  const searchInputRef = useRef(null);
+  useEffect(() => {
+    console.log(isFocused);
+    if (document.activeElement === searchInputRef.current)
+      console.log('test: ', searchInputRef.current);
+    else console.log('hi');
+  }, [searchInputRef, isFocused]);
   return (
     <>
       <H2>국내 모든 임상시험 검색하고 온라인으로 참여하기</H2>
       <Label htmlFor={diseaseId}>질환명 입력</Label>
       <SearchInput
+        ref={searchInputRef}
         id={diseaseId}
         searchDisease={searchDisesase}
         searchValue={searchValue}
         placeholder="질환명을 입력해주세요."
+        focus={focus}
+        blur={blur}
       />
-      <SearchResult searchedArr={searchedArr} isLoading={isLoading} />
+      <SearchResult isFocused={isFocused} searchedArr={searchedArr} isLoading={isLoading} />
     </>
   );
 };
