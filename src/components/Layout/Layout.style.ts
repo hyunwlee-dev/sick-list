@@ -7,6 +7,9 @@ export const Header = styled.header`
 export const Main = styled.main`
   background: #cae9ff;
   display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  padding: 4rem;
 `;
 
 export const H1 = styled.h1`
