@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useId, useRef, useState } from 'react';
+import React, { ChangeEvent, useId, useRef, useState } from 'react';
 import { styled, css } from 'styled-components';
 import { SearchInput } from '../components/SearchInput';
 import { SearchResult } from '../components/SearchResult';
@@ -18,14 +18,12 @@ const DisesaseContainer = () => {
   const blur = () => {
     setIsFocused(false);
   };
+  const updateSearchValue = (recommend: string) => {
+    console.log('recommend: ', recommend);
+    setSearchValue(recommend);
+  };
   //FIX: no necessarily ref
   const searchInputRef = useRef(null);
-  useEffect(() => {
-    console.log(isFocused);
-    if (document.activeElement === searchInputRef.current)
-      console.log('test: ', searchInputRef.current);
-    else console.log('hi');
-  }, [searchInputRef, isFocused]);
   return (
     <>
       <H2>국내 모든 임상시험 검색하고 온라인으로 참여하기</H2>
@@ -39,7 +37,12 @@ const DisesaseContainer = () => {
         focus={focus}
         blur={blur}
       />
-      <SearchResult isFocused={isFocused} searchedArr={searchedArr} isLoading={isLoading} />
+      <SearchResult
+        isFocused={isFocused}
+        searchedArr={searchedArr}
+        isLoading={isLoading}
+        updateSearchValue={updateSearchValue}
+      />
     </>
   );
 };

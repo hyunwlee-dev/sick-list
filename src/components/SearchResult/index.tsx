@@ -6,8 +6,9 @@ interface IProps {
   isFocused: boolean;
   searchedArr: SickResponse[];
   isLoading: boolean;
+  updateSearchValue: any;
 }
-export const SearchResult = ({ isFocused, searchedArr, isLoading }: IProps) => {
+export const SearchResult = ({ isFocused, searchedArr, isLoading, updateSearchValue }: IProps) => {
   if (!isFocused) return <></>;
   if (isLoading) return <>Loading...</>;
   return (
@@ -16,7 +17,8 @@ export const SearchResult = ({ isFocused, searchedArr, isLoading }: IProps) => {
       {searchedArr.length < 1 && <>최근 검색어가 없습니다.</>}
       {searchedArr.length >= 1 &&
         searchedArr?.map(({ sickCd, sickNm }) => (
-          <S.Li key={sickCd}>
+          //FIX: unavailable click
+          <S.Li key={sickCd} onClick={() => updateSearchValue(sickNm)}>
             <S.ImageWrapper>
               <img src="/search.svg" width={16} height={16} alt="search icon" />
             </S.ImageWrapper>
