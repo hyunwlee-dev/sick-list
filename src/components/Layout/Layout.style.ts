@@ -6,6 +6,7 @@ export const Header = styled.header`
 
 export const Main = styled.main`
   background: #cae9ff;
+  display: flex;
 `;
 
 export const H1 = styled.h1`
