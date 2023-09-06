@@ -6,15 +6,20 @@ const httpClient = new HttpClient(String(process.env.REACT_APP_BASE_URL));
 const sickService = new SickService(httpClient);
 
 export const useSearchInput = () => {
-  const [searchedValue, setSearchedValue] = useState([]);
+  const [searchedArr, setSearchedArr] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const fetchSick = useCallback(async (searchInput: string) => {
+    if (searchInput === '') {
+      setSearchedArr([]);
+      return;
+    }
     setIsLoading(true);
     try {
       const response = await sickService.get(searchInput);
       console.log('searchInput: ', searchInput);
-      setSearchedValue(response);
+      setSearchedArr(response);
     } catch (error) {
+      //TODO: treat error boundary
       // if (AxiosError(error)) {
       //   return error.response?.data.message;
       // }
@@ -22,5 +27,5 @@ export const useSearchInput = () => {
       setIsLoading(false);
     }
   }, []);
-  return { searchedValue, isLoading, fetchSick };
+  return { searchedArr, isLoading, fetchSick };
 };

@@ -4,7 +4,6 @@ export class SickService {
   httpClient;
   constructor(httpClient = new HttpClient('')) {
     this.httpClient = httpClient;
-    console.log('httpClient: ', httpClient);
   }
 
   async get(query: string) {
