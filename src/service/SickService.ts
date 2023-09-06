@@ -1,3 +1,4 @@
+import { isAxiosError } from 'axios';
 import { HttpClient } from '../httpClient';
 
 export class SickService {
@@ -7,7 +8,16 @@ export class SickService {
   }
 
   async get(query: string) {
-    const response = await this.httpClient.fetch(`sick`, { headers: {} }).get(`?q=${query}`);
-    return response.data;
+    try {
+      const response = await this.httpClient.fetch(`sick`, { headers: {} }).get(`?q=${query}`);
+      if (response.status === 200) {
+        console.info('calling api');
+        return response.data;
+      }
+    } catch (error) {
+      if (isAxiosError(error)) {
+        return error.response?.data.message;
+      }
+    }
   }
 }

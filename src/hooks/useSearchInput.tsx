@@ -16,7 +16,6 @@ export const useSearchInput = () => {
     setIsLoading(true);
     try {
       const response = await sickService.get(searchInput);
-      console.log('searchInput: ', searchInput);
       setSearchedArr(response);
     } catch (error) {
       //TODO: treat error boundary

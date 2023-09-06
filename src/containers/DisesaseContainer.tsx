@@ -19,7 +19,6 @@ const DisesaseContainer = () => {
     setIsFocused(false);
   };
   const updateSearchValue = (recommend: string) => {
-    console.log('recommend: ', recommend);
     setSearchValue(recommend);
   };
   //FIX: no necessarily ref
