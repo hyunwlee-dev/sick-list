@@ -4,12 +4,11 @@ import { SearchInput } from '../components/SearchInput';
 import { SearchResult } from '../components/SearchResult';
 import { useSearchInput } from '../hooks/useSearchInput';
 const DisesaseContainer = () => {
-  const { searchedArr, isLoading, fetchSick } = useSearchInput();
   const [searchValue, setSearchValue] = useState('');
+  const { searchedArr, isLoading } = useSearchInput(searchValue);
   const diseaseId = useId();
   const searchDisesase = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
-    fetchSick(e.target.value);
   };
   const [isFocused, setIsFocused] = useState(false);
   const focus = () => {
