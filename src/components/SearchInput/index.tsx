@@ -10,10 +10,12 @@ interface IProps {
   placeholder: string;
   focus: () => void;
   blur: () => void;
+  //FIX: Don't use any type
+  keyDownSearchInput: any;
 }
 
 export const SearchInput = React.forwardRef<HTMLInputElement, IProps>(
-  ({ id, searchDisease, searchValue, placeholder, focus, blur }, ref) => {
+  ({ id, searchDisease, searchValue, placeholder, focus, blur, keyDownSearchInput }, ref) => {
     return (
       <S.Section>
         <Search
@@ -24,6 +26,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, IProps>(
           placeholder={placeholder}
           focus={focus}
           blur={blur}
+          keyDownSearchInput={keyDownSearchInput}
         />
         <S.ImageWrapper>
           <S.SearchImage src="/search.svg" width={24} height={24} alt="search image" />
@@ -34,7 +37,7 @@ export const SearchInput = React.forwardRef<HTMLInputElement, IProps>(
 );
 
 const Search = React.forwardRef<HTMLInputElement, IProps>(
-  ({ id, searchValue, searchDisease, placeholder, focus, blur }, ref) => {
+  ({ id, searchValue, searchDisease, placeholder, focus, blur, keyDownSearchInput }, ref) => {
     return (
       <S.SearchInput
         ref={ref}
@@ -44,6 +47,7 @@ const Search = React.forwardRef<HTMLInputElement, IProps>(
         placeholder={placeholder}
         onFocus={focus}
         onBlur={blur}
+        onKeyDown={keyDownSearchInput}
       />
     );
   },
